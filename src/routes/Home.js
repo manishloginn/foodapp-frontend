@@ -7,15 +7,20 @@ import { motion, useScroll } from "framer-motion"
 function Home() {
 
 
+  
+  const [data, setdata] = useState([])
+
   const allData = useSelector((e) => e.data)
   const cartData = useSelector((e) => e.cart)
   // const totalPrice = useSelector((e) => e.totalprice)
   const dispatch = useDispatch()
   // const { scrollYProgress } = useScroll();
 
-
+  setdata(allData)
   const haldelcart = (item) => {
    
+
+
     const itemExists = cartData.some((e) => item._id === e._id);
     if (itemExists) {
       alert('Already in cart');
@@ -34,7 +39,7 @@ function Home() {
     <>
      {/* <motion.div style={{ scaleX: scrollYProgress }} ></motion.div> */}
       <div className='homeproduct'>
-        {allData && allData.map((item, i) => {
+        {data && data.map((item, i) => {
           return (
             <>
               <div className='productItem' key={item._id}>
