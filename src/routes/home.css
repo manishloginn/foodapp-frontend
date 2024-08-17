@@ -7,7 +7,14 @@
     background-color: rgba(211, 211, 211, 0.466);
     width: 90vw;
     margin: auto;
-    padding: 10px;
+    padding: 30px;
+    margin-top: 10px;
+    h2 {
+        text-align: center;
+        color: #333;
+        font-size: 28px;
+        margin-bottom: 30px;
+    }
 }
 
 
@@ -17,7 +24,7 @@
     background-color: #fff;
     border-radius: 20px;
     width: 600px;
-    height: 300px;
+    height: fit-content;
 
 }
 
@@ -55,8 +62,15 @@
         margin: 5px 0;
         white-space: normal;
         overflow-wrap: break-word;
+        
         font-weight: 300;
         color: black;
         /* margin-bottom: -5px; */
     }
+}
+
+.description {
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

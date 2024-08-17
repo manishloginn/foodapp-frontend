@@ -5,13 +5,21 @@ import "./navbar.css"
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import SensorOccupiedTwoToneIcon from '@mui/icons-material/SensorOccupiedTwoTone';
 import SupervisorAccountOutlinedIcon from '@mui/icons-material/SupervisorAccountOutlined';
+import useSelection from 'antd/es/table/hooks/useSelection';
+import { useSelector } from 'react-redux';
+
 
 function Navbar() {
 
     const [register, SetRegister] = useState(false)
     const [Login, SetLogin] = useState(false)
 
+    const cartData = useSelector((e) => e.cart)
+
+    const cartItem = cartData.length
+
     const navigate = useNavigate()
+
 
 
 
@@ -47,6 +55,12 @@ function Navbar() {
                         </div>
                        
                         <div onClick={() => navigate('/cart') } style={{cursor:"pointer", display:"flex"}}>
+
+                            {
+                                cartItem === 0? 
+                                "":<p className='cartNumber'>{cartItem}</p>
+                            }
+                            
                             <AddShoppingCartIcon style={{ fontSize: "40px", color:"grey" }} /> <Link className="nav-link" to="/cart">Cart</Link>
                         </div>
                     </div>

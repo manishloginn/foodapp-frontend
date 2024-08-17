@@ -1,25 +1,38 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import "./home.css"
 import { Action } from '../store/action'
-import Cart from './Cart'
+import { motion, useScroll } from "framer-motion"
 
 function Home() {
 
 
   const allData = useSelector((e) => e.data)
+  const cartData = useSelector((e) => e.cart)
+  // const totalPrice = useSelector((e) => e.totalprice)
   const dispatch = useDispatch()
+  // const { scrollYProgress } = useScroll();
 
 
   const haldelcart = (item) => {
-    console.log("hit")
-    dispatch({ type: Action.CART, payload: item })
+   
+    const itemExists = cartData.some((e) => item._id === e._id);
+    if (itemExists) {
+      alert('Already in cart');
+      console.log(item.price)
+    } else {
+      console.log(item.price)
+      dispatch({ type: Action.CART, payload: { data: item, totalamount: item.price } });
+    }
   }
 
-  // console.log(cart)
+  // const scrollRef = useRef(null)
+
+
 
   return (
     <>
+     {/* <motion.div style={{ scaleX: scrollYProgress }} ></motion.div> */}
       <div className='homeproduct'>
         {allData && allData.map((item, i) => {
           return (

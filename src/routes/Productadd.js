@@ -4,6 +4,7 @@ import "./product.css"
 import { useNavigate } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 import { Action } from '../store/action'
+import { Empty } from 'antd';
 
 
 function Productadd() {
@@ -93,6 +94,24 @@ function Productadd() {
     }).catch((err) => alert(err.message))
   }
 
+  const TruncatedText = ({ text, wordLimit }) => {
+      const words = text.split(" ");
+      if (words.length > wordLimit) {
+        return words.slice(0, wordLimit).join(" ") + '...';
+      }
+      return text;
+    };
+
+    const deleteData = (item) => {
+      console.log(item._id)
+
+      axios.post('/deleteItem', {id : item._id})
+      .then(() => console.log('done'))
+      .catch((err) => console.log(err))
+
+
+    }
+
   return (
 
     <>
@@ -135,23 +154,41 @@ function Productadd() {
 
 
       {
-        userData && userData.length === 0 && <h1>No data found</h1>
+        !formToggle && userData && userData.length === 0 &&
+        <Empty />
       }
 
-      {
-        !formToggle && userData && userData.map((data, index) => {
-          return (
-            <div key={data._id || index} className="product-card">
-              <img src={`http://localhost:5000/${data.image}`} alt={data.name} />
-              <h2>{data.name}</h2>
-              <p>{data.description}</p>
-              <p>Price: {data.price}</p>
-              <p>Category: {data.category}</p>
-            </div>
-          )
-        })
+      <div className='homeproduct'>
+        {
+          !formToggle && userData && userData.map((item, i) => {
+            // console.log(item)
+            return (
+              <div className='productItem' key={item._id}>
+                <div className='restrname' key={item.restrauntName}>
+                  <p>By {item.restrauntName}</p>
+                  <hr />
+                </div>
+                <div className='lowersection' key={item.name}>
+                  <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
+                    <img src={`http://localhost:5000/${item.image}`}></img>
+                  </div>
 
-      }
+                  <div className='otherside'>
+                    <p className='name'>{item.name}</p>
+                    <TruncatedText text={item.description} wordLimit={15} />
+                    {/* <p  className='description'>{item.description}</p> */}
+                    <h5 style={{marginTop:"10px"}}> ₹{item.price}</h5>
+                  </div>
+                  <div>
+                    <button onClick={() => deleteData(item)} className='deleteitem' >delete</button>
+                  </div>
+                </div>
+              </div>
+            )
+          })
+
+        }
+      </div >
 
 
     </>

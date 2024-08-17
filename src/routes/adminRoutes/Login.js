@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 
 function AdminLogin() {
     const [data, setData] = useState({
@@ -29,7 +30,11 @@ function AdminLogin() {
 
     return (
         <form onSubmit={formHandel} style={{ position: 'absolute', top: "0", left: '0', width: "100vw", height: "100vh" }} >
-            <h1>Login</h1>
+
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <h1>Login </h1>
+                <Link to='/' style={{ cursor: "pointer", color: "grey" }}><HomeOutlinedIcon style={{ fontSize: "50px" }} /></Link>
+            </div>
             <br />
 
             <label>

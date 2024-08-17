@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import "./navbar.css"
 import SensorOccupiedTwoToneIcon from '@mui/icons-material/SensorOccupiedTwoTone';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 
 function CartNav() {
 
@@ -15,7 +16,7 @@ function CartNav() {
     return (
 
         <>
-          <div className="navbar navbar-expand-lg navbar-light bg-light">
+          <div className=" navbar navbar-expand-lg navbar-light bg-light">
                 <nav style={{width:"90vw", margin:"auto"}} className='navbar navbar-expand-lg navbar-light bg-light' >
                     <div>
                         <Link className="navbar-brand" to="/">Food App</Link>
@@ -36,6 +37,9 @@ function CartNav() {
                         </div>
                         <div style={{cursor:"pointer"}}>
                            <HelpOutlineIcon style={{ fontSize: "40px" , color:"grey"}} /> <span>Cart</span>
+                        </div>
+                        <div style={{cursor:"pointer"}} onClick={() => SetLogin((prev) => !prev)}>
+                           <LoginOutlinedIcon style={{ fontSize: "40px" , color:"grey"}} /> <span>Login</span>
                         </div>
                     </div>
                 </nav>
